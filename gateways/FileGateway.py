@@ -7,7 +7,7 @@ class FileGateway:
     def __init__(self, metadata, data, output_dir):
         super().__init__()
         dir_path = os.path.dirname(os.path.realpath(__file__))
-        self.base_directory = os.path.join(dir_path,  './')
+        self.base_directory = os.path.join(dir_path,  './../')
         self.metadata = metadata
         self.data = data
         self.output_dir = output_dir
@@ -18,7 +18,7 @@ class FileGateway:
 
         data['year'] = data['start'].dt.strftime('%Y') 
         data['weekday'] = data['start'].dt.strftime('%a')
-        data['month'] = data['start'].dt.strftime('%m')
+        data['month'] = data['start'].dt.strftime('%Y')  + '-' + data['start'].dt.strftime('%m')
         data['month_name'] = data['start'].dt.strftime('%b')
         data['week'] = data['start'].dt.strftime('%V')
         data['day'] = data['start'].dt.strftime('%e')

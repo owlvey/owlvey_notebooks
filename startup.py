@@ -79,18 +79,9 @@ def generate_slo(file_gateway, output_month):
     
     merged = merged.merge(sources, left_on='Source', right_on='Source', how='left')
 
-    output_slo = merged.merge(output_month, left_on='Source', right_on='Source', how='left')
+    output_slo = merged.merge(output_month, left_on='Source', right_on='Source', how='left')    
 
-    output_slo["ava_debt"] = output_slo["ava_prop"] - output_slo["AvailabilitySlo"]
-    output_slo["ava_debt"] = abs(np.where(output_slo["ava_debt"] < 0, -1 * output_slo["ava_debt"], 0))
-
-    output_slo["exp_debt"] = output_slo["exp_prop"] - output_slo["ExperienceSlo"]
-    output_slo["exp_debt"] = abs(np.where(output_slo["exp_debt"] < 0, -1 * output_slo["exp_debt"], 0))
-
-    output_slo["lat_debt"] = output_slo["lat"] - output_slo["LatencySlo"]
-    output_slo["lat_debt"] = abs(np.where(output_slo["lat_debt"] < 0, -1 * output_slo["lat_debt"], 0))
-
-    output_slo = output_slo[ ["Group", "Journey", "AvailabilitySLA", "AvailabilitySlo" , "ExperienceSlo",  "LatencySLA",  "LatencySlo", "Feature", "Source", "year" , "month", "month_name", "total", "ava", "ava_prop", "ava_debt", "exp", "exp_prop", "exp_debt", "lat", "lat_debt"]]
+    output_slo = output_slo[ ["Group", "Journey", "AvailabilitySLA", "AvailabilitySlo" , "ExperienceSlo",  "LatencySLA",  "LatencySlo", "Feature", "Source", "year" , "month", "month_name", "total", "ava", "ava_prop","exp", "exp_prop", "lat"]]
 
     return output_slo
     
